@@ -154,6 +154,190 @@ namespace TPWinForm_equipo_9A.Utilidades
             return lista;
         }
 
+        public static int AgregarArticulo(Articulo a)
+        {
+            const string sql = @"
+                INSERT INTO ARTICULOS (Codigo, Nombre, Descripcion, IdMarca, IdCategoria, Precio)
+                VALUES (@codigo, @nombre, @descripcion, @idMarca, @idCategoria, @precio);
+                SELECT SCOPE_IDENTITY();";
+
+            using (var conn = GetConnection())
+            using (var cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@codigo",      a.Codigo);
+                cmd.Parameters.AddWithValue("@nombre",      a.Nombre);
+                cmd.Parameters.AddWithValue("@descripcion", a.Descripcion);
+                cmd.Parameters.AddWithValue("@idMarca",     a.Marca     != null ? (object)a.Marca.Id     : DBNull.Value);
+                cmd.Parameters.AddWithValue("@idCategoria", a.Categoria != null ? (object)a.Categoria.Id : DBNull.Value);
+                cmd.Parameters.AddWithValue("@precio",      a.Precio);
+                conn.Open();
+                return Convert.ToInt32(cmd.ExecuteScalar());
+            }
+        }
+
+        public static void AgregarImagen(int idArticulo, string url)
+        {
+            const string sql = "INSERT INTO IMAGENES (IdArticulo, ImagenUrl) VALUES (@idArticulo, @url)";
+
+            using (var conn = GetConnection())
+            using (var cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@idArticulo", idArticulo);
+                cmd.Parameters.AddWithValue("@url",        url);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public static void AgregarMarca(Marca m)
+        {
+            const string sql = "INSERT INTO MARCAS (Descripcion) VALUES (@descripcion)";
+
+            using (var conn = GetConnection())
+            using (var cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@descripcion", m.Descripcion);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public static void AgregarCategoria(Categoria c)
+        {
+            const string sql = "INSERT INTO CATEGORIAS (Descripcion) VALUES (@descripcion)";
+
+            using (var conn = GetConnection())
+            using (var cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@descripcion", c.Descripcion);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        // ── UPDATE ────────────────────────────────────────────────────────────
+
+        public static void ModificarArticulo(Articulo a)
+        {
+            const string sqlArticulo = @"
+                UPDATE ARTICULOS
+                SET Codigo      = @codigo,
+                    Nombre      = @nombre,
+                    Descripcion = @descripcion,
+                    IdMarca     = @idMarca,
+                    IdCategoria = @idCategoria,
+                    Precio      = @precio
+                WHERE Id = @id";
+
+            using (var conn = GetConnection())
+            using (var cmd = new SqlCommand(sqlArticulo, conn))
+            {
+                cmd.Parameters.AddWithValue("@id",          a.Id);
+                cmd.Parameters.AddWithValue("@codigo",      a.Codigo);
+                cmd.Parameters.AddWithValue("@nombre",      a.Nombre);
+                cmd.Parameters.AddWithValue("@descripcion", a.Descripcion);
+                cmd.Parameters.AddWithValue("@idMarca",     a.Marca     != null ? (object)a.Marca.Id     : DBNull.Value);
+                cmd.Parameters.AddWithValue("@idCategoria", a.Categoria != null ? (object)a.Categoria.Id : DBNull.Value);
+                cmd.Parameters.AddWithValue("@precio",      a.Precio);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+
+            using (var conn = GetConnection())
+            using (var cmd = new SqlCommand("DELETE FROM IMAGENES WHERE IdArticulo = @id", conn))
+            {
+                cmd.Parameters.AddWithValue("@id", a.Id);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+
+            foreach (var img in a.Imagenes)
+            {
+                using (var conn = GetConnection())
+                using (var cmd = new SqlCommand("INSERT INTO IMAGENES (IdArticulo, ImagenUrl) VALUES (@id, @url)", conn))
+                {
+                    cmd.Parameters.AddWithValue("@id",  a.Id);
+                    cmd.Parameters.AddWithValue("@url", img.ImagenUrl);
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public static void ModificarMarca(Marca m)
+        {
+            const string sql = "UPDATE MARCAS SET Descripcion = @descripcion WHERE Id = @id";
+
+            using (var conn = GetConnection())
+            using (var cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@id",          m.Id);
+                cmd.Parameters.AddWithValue("@descripcion", m.Descripcion);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public static void ModificarCategoria(Categoria c)
+        {
+            const string sql = "UPDATE CATEGORIAS SET Descripcion = @descripcion WHERE Id = @id";
+
+            using (var conn = GetConnection())
+            using (var cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@id",          c.Id);
+                cmd.Parameters.AddWithValue("@descripcion", c.Descripcion);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+
+        public static void EliminarArticulo(int id)
+        {
+            using (var conn = GetConnection())
+            using (var cmd = new SqlCommand("DELETE FROM IMAGENES WHERE IdArticulo = @id", conn))
+            {
+                cmd.Parameters.AddWithValue("@id", id);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+
+            using (var conn = GetConnection())
+            using (var cmd = new SqlCommand("DELETE FROM ARTICULOS WHERE Id = @id", conn))
+            {
+                cmd.Parameters.AddWithValue("@id", id);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public static void EliminarMarca(int id)
+        {
+            const string sql = "DELETE FROM MARCAS WHERE Id = @id";
+
+            using (var conn = GetConnection())
+            using (var cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@id", id);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public static void EliminarCategoria(int id)
+        {
+            const string sql = "DELETE FROM CATEGORIAS WHERE Id = @id";
+
+            using (var conn = GetConnection())
+            using (var cmd = new SqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@id", id);
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
         private static Marca MapearMarca(SqlDataReader r) =>
             new Marca { Id = (int)r["Id"], Descripcion = r["Descripcion"].ToString() };
 
