@@ -31,7 +31,6 @@ namespace TPWinForm_equipo_9A
             txtPrecio.Text = _articulo.Precio.ToString();
             foreach (var img in _articulo.Imagenes)
                 lstImagenes.Items.Add(img.ImagenUrl);
-            // TODO: Etapa 2 - seleccionar Marca y Categoría en los ComboBox
         }
 
         private void btnAgregarImagen_Click(object sender, EventArgs e)
@@ -50,7 +49,6 @@ namespace TPWinForm_equipo_9A
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            // TODO: Etapa 2 - validar y persistir en DB
             this.DialogResult = DialogResult.OK;
             Close();
         }
