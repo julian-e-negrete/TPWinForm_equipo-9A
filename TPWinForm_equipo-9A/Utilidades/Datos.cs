@@ -15,7 +15,6 @@ namespace TPWinForm_equipo_9A.Utilidades
         private static SqlConnection GetConnection() =>
             new SqlConnection(ConnectionString);
 
-
         public static List<Marca> ObtenerMarcas()
         {
             var lista = new List<Marca>();
@@ -31,7 +30,6 @@ namespace TPWinForm_equipo_9A.Utilidades
             }
             return lista;
         }
-
 
         public static List<Categoria> ObtenerCategorias()
         {
@@ -49,17 +47,14 @@ namespace TPWinForm_equipo_9A.Utilidades
             return lista;
         }
 
-
         public static List<Articulo> ObtenerArticulos()
         {
             var lista = new List<Articulo>();
             const string sql = @"
                 SELECT a.Id, a.Codigo, a.Nombre, a.Descripcion, a.Precio,
-                       m.Id AS IdMarca,      m.Descripcion AS NombreMarca,
-                       c.Id AS IdCategoria,  c.Descripcion AS NombreCategoria
-
+                       m.Id AS IdMarca,     m.Descripcion AS NombreMarca,
+                       c.Id AS IdCategoria, c.Descripcion AS NombreCategoria
                 FROM   ARTICULOS a
-
                 LEFT JOIN MARCAS     m ON a.IdMarca     = m.Id
                 LEFT JOIN CATEGORIAS c ON a.IdCategoria = c.Id
                 ORDER BY a.Nombre";
@@ -79,8 +74,8 @@ namespace TPWinForm_equipo_9A.Utilidades
         {
             const string sql = @"
                 SELECT a.Id, a.Codigo, a.Nombre, a.Descripcion, a.Precio,
-                       m.Id AS IdMarca,      m.Descripcion AS NombreMarca,
-                       c.Id AS IdCategoria,  c.Descripcion AS NombreCategoria
+                       m.Id AS IdMarca,     m.Descripcion AS NombreMarca,
+                       c.Id AS IdCategoria, c.Descripcion AS NombreCategoria
                 FROM   ARTICULOS a
                 LEFT JOIN MARCAS     m ON a.IdMarca     = m.Id
                 LEFT JOIN CATEGORIAS c ON a.IdCategoria = c.Id
@@ -103,16 +98,16 @@ namespace TPWinForm_equipo_9A.Utilidades
             string filtro;
             switch (campo)
             {
-                case "Código":    filtro = "a.Codigo LIKE @valor";          break;
-                case "Marca":     filtro = "m.Descripcion LIKE @valor";     break;
-                case "Categoría": filtro = "c.Descripcion LIKE @valor";     break;
-                default:          filtro = "a.Nombre LIKE @valor";          break;
+                case "Código":    filtro = "a.Codigo LIKE @valor";      break;
+                case "Marca":     filtro = "m.Descripcion LIKE @valor"; break;
+                case "Categoría": filtro = "c.Descripcion LIKE @valor"; break;
+                default:          filtro = "a.Nombre LIKE @valor";      break;
             }
 
             string sql = $@"
                 SELECT a.Id, a.Codigo, a.Nombre, a.Descripcion, a.Precio,
-                       m.Id AS IdMarca,      m.Descripcion AS NombreMarca,
-                       c.Id AS IdCategoria,  c.Descripcion AS NombreCategoria
+                       m.Id AS IdMarca,     m.Descripcion AS NombreMarca,
+                       c.Id AS IdCategoria, c.Descripcion AS NombreCategoria
                 FROM   ARTICULOS a
                 LEFT JOIN MARCAS     m ON a.IdMarca     = m.Id
                 LEFT JOIN CATEGORIAS c ON a.IdCategoria = c.Id
@@ -215,8 +210,6 @@ namespace TPWinForm_equipo_9A.Utilidades
             }
         }
 
-        // ── UPDATE ────────────────────────────────────────────────────────────
-
         public static void ModificarArticulo(Articulo a)
         {
             const string sqlArticulo = @"
@@ -291,7 +284,6 @@ namespace TPWinForm_equipo_9A.Utilidades
                 cmd.ExecuteNonQuery();
             }
         }
-
 
         public static void EliminarArticulo(int id)
         {

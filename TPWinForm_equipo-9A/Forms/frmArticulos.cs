@@ -74,7 +74,21 @@ namespace TPWinForm_equipo_9A
         private void btnEliminar_Click(object sender, EventArgs e)
         {
             if (dgvArticulos.SelectedRows.Count == 0) return;
-           
+            var articulo = (Articulo)dgvArticulos.SelectedRows[0].DataBoundItem;
+            var confirm = MessageBox.Show(
+                "¿Eliminar el artículo '" + articulo.Nombre + "'?", "Confirmar",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (confirm != DialogResult.Yes) return;
+            try
+            {
+                Datos.EliminarArticulo(articulo.Id);
+                Cargar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al eliminar: " + ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

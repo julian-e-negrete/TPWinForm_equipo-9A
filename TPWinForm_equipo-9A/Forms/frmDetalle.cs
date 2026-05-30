@@ -25,6 +25,26 @@ namespace TPWinForm_equipo_9A
                 lstImagenes.Items.Add(img.ImagenUrl);
         }
 
+        private void lstImagenes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lstImagenes.SelectedItem == null) return;
+            CargarImagen(lstImagenes.SelectedItem.ToString());
+        }
+
+        private void CargarImagen(string url)
+        {
+            try
+            {
+                picImagen.Image = null;
+                picImagen.ImageLocation = url;
+                picImagen.LoadAsync();
+            }
+            catch
+            {
+                picImagen.Image = null;
+            }
+        }
+
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             Close();

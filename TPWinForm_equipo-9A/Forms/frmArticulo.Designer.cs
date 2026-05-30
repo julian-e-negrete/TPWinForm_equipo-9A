@@ -28,15 +28,17 @@ namespace TPWinForm_equipo_9A
             this.txtPrecio = new System.Windows.Forms.TextBox();
             this.grpImagenes = new System.Windows.Forms.GroupBox();
             this.lstImagenes = new System.Windows.Forms.ListBox();
+            this.picImagen = new System.Windows.Forms.PictureBox();
+            this.btnQuitarImagen = new System.Windows.Forms.Button();
             this.lblUrlImagen = new System.Windows.Forms.Label();
             this.txtImagenUrl = new System.Windows.Forms.TextBox();
             this.btnAgregarImagen = new System.Windows.Forms.Button();
-            this.btnQuitarImagen = new System.Windows.Forms.Button();
             this.pnlButtons = new System.Windows.Forms.Panel();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.grpDatos.SuspendLayout();
             this.grpImagenes.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picImagen)).BeginInit();
             this.pnlButtons.SuspendLayout();
             this.SuspendLayout();
 
@@ -131,43 +133,52 @@ namespace TPWinForm_equipo_9A
 
             // grpImagenes
             this.grpImagenes.Controls.Add(this.lstImagenes);
+            this.grpImagenes.Controls.Add(this.picImagen);
+            this.grpImagenes.Controls.Add(this.btnQuitarImagen);
             this.grpImagenes.Controls.Add(this.lblUrlImagen);
             this.grpImagenes.Controls.Add(this.txtImagenUrl);
             this.grpImagenes.Controls.Add(this.btnAgregarImagen);
-            this.grpImagenes.Controls.Add(this.btnQuitarImagen);
             this.grpImagenes.Location = new System.Drawing.Point(12, 260);
             this.grpImagenes.Name = "grpImagenes";
-            this.grpImagenes.Size = new System.Drawing.Size(560, 175);
+            this.grpImagenes.Size = new System.Drawing.Size(560, 200);
             this.grpImagenes.TabIndex = 1;
             this.grpImagenes.Text = "Imágenes";
 
             // lstImagenes
             this.lstImagenes.Location = new System.Drawing.Point(15, 20);
             this.lstImagenes.Name = "lstImagenes";
-            this.lstImagenes.Size = new System.Drawing.Size(450, 95);
+            this.lstImagenes.Size = new System.Drawing.Size(210, 120);
             this.lstImagenes.TabIndex = 0;
+            this.lstImagenes.SelectedIndexChanged += new System.EventHandler(this.lstImagenes_SelectedIndexChanged);
+
+            // picImagen
+            this.picImagen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picImagen.Location = new System.Drawing.Point(230, 20);
+            this.picImagen.Name = "picImagen";
+            this.picImagen.Size = new System.Drawing.Size(320, 120);
+            this.picImagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 
             // btnQuitarImagen
-            this.btnQuitarImagen.Location = new System.Drawing.Point(470, 20);
+            this.btnQuitarImagen.Location = new System.Drawing.Point(15, 148);
             this.btnQuitarImagen.Name = "btnQuitarImagen";
-            this.btnQuitarImagen.Size = new System.Drawing.Size(75, 25);
-            this.btnQuitarImagen.Text = "Quitar";
+            this.btnQuitarImagen.Size = new System.Drawing.Size(90, 23);
+            this.btnQuitarImagen.Text = "Quitar sel.";
             this.btnQuitarImagen.TabIndex = 1;
             this.btnQuitarImagen.Click += new System.EventHandler(this.btnQuitarImagen_Click);
 
             // lblUrlImagen
             this.lblUrlImagen.AutoSize = true;
-            this.lblUrlImagen.Location = new System.Drawing.Point(15, 128);
+            this.lblUrlImagen.Location = new System.Drawing.Point(115, 152);
             this.lblUrlImagen.Text = "URL:";
 
             // txtImagenUrl
-            this.txtImagenUrl.Location = new System.Drawing.Point(50, 125);
+            this.txtImagenUrl.Location = new System.Drawing.Point(148, 149);
             this.txtImagenUrl.Name = "txtImagenUrl";
-            this.txtImagenUrl.Size = new System.Drawing.Size(415, 20);
+            this.txtImagenUrl.Size = new System.Drawing.Size(320, 20);
             this.txtImagenUrl.TabIndex = 2;
 
             // btnAgregarImagen
-            this.btnAgregarImagen.Location = new System.Drawing.Point(470, 123);
+            this.btnAgregarImagen.Location = new System.Drawing.Point(473, 147);
             this.btnAgregarImagen.Name = "btnAgregarImagen";
             this.btnAgregarImagen.Size = new System.Drawing.Size(75, 25);
             this.btnAgregarImagen.Text = "Agregar";
@@ -200,18 +211,20 @@ namespace TPWinForm_equipo_9A
             // frmArticulo
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 490);
+            this.ClientSize = new System.Drawing.Size(584, 515);
             this.Controls.Add(this.grpDatos);
             this.Controls.Add(this.grpImagenes);
             this.Controls.Add(this.pnlButtons);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.Load += new System.EventHandler(this.frmArticulo_Load);
             this.Name = "frmArticulo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Artículo";
             this.grpDatos.ResumeLayout(false);
             this.grpDatos.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picImagen)).EndInit();
             this.grpImagenes.ResumeLayout(false);
             this.grpImagenes.PerformLayout();
             this.pnlButtons.ResumeLayout(false);
@@ -233,6 +246,7 @@ namespace TPWinForm_equipo_9A
         private System.Windows.Forms.TextBox txtPrecio;
         private System.Windows.Forms.GroupBox grpImagenes;
         private System.Windows.Forms.ListBox lstImagenes;
+        private System.Windows.Forms.PictureBox picImagen;
         private System.Windows.Forms.Label lblUrlImagen;
         private System.Windows.Forms.TextBox txtImagenUrl;
         private System.Windows.Forms.Button btnAgregarImagen;

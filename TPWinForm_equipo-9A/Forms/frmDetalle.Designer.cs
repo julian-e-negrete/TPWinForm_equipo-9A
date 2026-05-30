@@ -28,10 +28,12 @@ namespace TPWinForm_equipo_9A
             this.lblPrecioVal = new System.Windows.Forms.Label();
             this.grpImagenes = new System.Windows.Forms.GroupBox();
             this.lstImagenes = new System.Windows.Forms.ListBox();
+            this.picImagen = new System.Windows.Forms.PictureBox();
             this.pnlBottom = new System.Windows.Forms.Panel();
             this.btnCerrar = new System.Windows.Forms.Button();
             this.grpInfo.SuspendLayout();
             this.grpImagenes.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picImagen)).BeginInit();
             this.pnlBottom.SuspendLayout();
             this.SuspendLayout();
 
@@ -50,7 +52,7 @@ namespace TPWinForm_equipo_9A
             this.grpInfo.Controls.Add(this.lblPrecioVal);
             this.grpInfo.Location = new System.Drawing.Point(12, 12);
             this.grpInfo.Name = "grpInfo";
-            this.grpInfo.Size = new System.Drawing.Size(540, 230);
+            this.grpInfo.Size = new System.Drawing.Size(740, 230);
             this.grpInfo.Text = "Información del Artículo";
 
             // lblCodigo
@@ -87,7 +89,7 @@ namespace TPWinForm_equipo_9A
             this.lblDescripcionVal.AutoSize = false;
             this.lblDescripcionVal.Location = new System.Drawing.Point(120, 88);
             this.lblDescripcionVal.Name = "lblDescripcionVal";
-            this.lblDescripcionVal.Size = new System.Drawing.Size(400, 40);
+            this.lblDescripcionVal.Size = new System.Drawing.Size(600, 40);
             this.lblDescripcionVal.Text = "-";
 
             // lblMarca
@@ -128,14 +130,24 @@ namespace TPWinForm_equipo_9A
 
             // grpImagenes
             this.grpImagenes.Controls.Add(this.lstImagenes);
+            this.grpImagenes.Controls.Add(this.picImagen);
             this.grpImagenes.Location = new System.Drawing.Point(12, 255);
             this.grpImagenes.Name = "grpImagenes";
-            this.grpImagenes.Size = new System.Drawing.Size(540, 155);
-            this.grpImagenes.Text = "Imágenes";
+            this.grpImagenes.Size = new System.Drawing.Size(740, 220);
+            this.grpImagenes.Text = "Imágenes (seleccioná una URL para visualizarla)";
 
             // lstImagenes
-            this.lstImagenes.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lstImagenes.Location = new System.Drawing.Point(10, 20);
             this.lstImagenes.Name = "lstImagenes";
+            this.lstImagenes.Size = new System.Drawing.Size(220, 186);
+            this.lstImagenes.SelectedIndexChanged += new System.EventHandler(this.lstImagenes_SelectedIndexChanged);
+
+            // picImagen
+            this.picImagen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picImagen.Location = new System.Drawing.Point(240, 20);
+            this.picImagen.Name = "picImagen";
+            this.picImagen.Size = new System.Drawing.Size(488, 186);
+            this.picImagen.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
 
             // pnlBottom
             this.pnlBottom.Controls.Add(this.btnCerrar);
@@ -144,7 +156,7 @@ namespace TPWinForm_equipo_9A
             this.pnlBottom.Name = "pnlBottom";
 
             // btnCerrar
-            this.btnCerrar.Location = new System.Drawing.Point(474, 10);
+            this.btnCerrar.Location = new System.Drawing.Point(660, 10);
             this.btnCerrar.Name = "btnCerrar";
             this.btnCerrar.Size = new System.Drawing.Size(90, 25);
             this.btnCerrar.Text = "Cerrar";
@@ -153,7 +165,7 @@ namespace TPWinForm_equipo_9A
             // frmDetalle
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(564, 460);
+            this.ClientSize = new System.Drawing.Size(764, 530);
             this.Controls.Add(this.grpInfo);
             this.Controls.Add(this.grpImagenes);
             this.Controls.Add(this.pnlBottom);
@@ -165,6 +177,7 @@ namespace TPWinForm_equipo_9A
             this.Text = "Detalle del Artículo";
             this.grpInfo.ResumeLayout(false);
             this.grpInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picImagen)).EndInit();
             this.grpImagenes.ResumeLayout(false);
             this.pnlBottom.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -185,6 +198,7 @@ namespace TPWinForm_equipo_9A
         private System.Windows.Forms.Label lblPrecioVal;
         private System.Windows.Forms.GroupBox grpImagenes;
         private System.Windows.Forms.ListBox lstImagenes;
+        private System.Windows.Forms.PictureBox picImagen;
         private System.Windows.Forms.Panel pnlBottom;
         private System.Windows.Forms.Button btnCerrar;
     }

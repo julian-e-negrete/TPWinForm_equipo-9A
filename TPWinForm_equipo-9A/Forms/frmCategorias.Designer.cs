@@ -101,6 +101,7 @@ namespace TPWinForm_equipo_9A
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.Load += new System.EventHandler(this.frmCategorias_Load);
             this.Name = "frmCategorias";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Gestión de Categorías";
