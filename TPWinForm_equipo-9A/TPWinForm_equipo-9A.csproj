@@ -52,6 +52,42 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmArticulo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmArticulo.Designer.cs">
+      <DependentUpon>frmArticulo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmArticulos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmArticulos.Designer.cs">
+      <DependentUpon>frmArticulos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmCategorias.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmCategorias.Designer.cs">
+      <DependentUpon>frmCategorias.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmDetalle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmDetalle.Designer.cs">
+      <DependentUpon>frmDetalle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmMarcas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmMarcas.Designer.cs">
+      <DependentUpon>frmMarcas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmPrincipal.Designer.cs">
+      <DependentUpon>frmPrincipal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Modelos\Articulo.cs" />
     <Compile Include="Modelos\Categoria.cs" />
     <Compile Include="Modelos\Imagen.cs" />
